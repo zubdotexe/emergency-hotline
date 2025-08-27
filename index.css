@@ -1,0 +1,10 @@
+.counter {
+    background-color: rgba(65, 255, 107, 0.1);
+    padding: 12px;
+    border-radius: 50px;
+    width: 123px;
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
