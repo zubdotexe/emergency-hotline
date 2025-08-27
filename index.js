@@ -19,3 +19,31 @@ for(let i = 0; i < favList.length; i++) {
         favCounter.innerHTML = temp;
     })
 }
+
+const callBtns = document.querySelectorAll(".call-btn");
+const coins = document.getElementById("coin-counter");
+
+
+for(let i = 0; i < callBtns.length; i++) {
+    btn = callBtns[i];
+    
+    btn.addEventListener("click", (e) => {
+        let temp = parseInt(coins.innerText);
+        console.log('temp', temp);
+        console.log('', e.target.parentNode.parentNode);
+        const cardElem = e.target.parentNode.parentNode;
+        const serviceName = cardElem.querySelectorAll("div")[0].querySelector("h2").innerText;
+        const serviceNum = cardElem.querySelectorAll("div")[1].querySelector("p").innerText;
+        console.log('', serviceNum);
+        
+        
+        if(temp < 20) {
+        alert("❌ You must have at least 20 coins to make a call!");
+        }
+        else {
+            alert(`📞 Calling ${serviceName} ${serviceNum}...`);
+            temp -= 20;
+            coins.innerText = temp;
+        }
+    })
+}
