@@ -4,7 +4,8 @@ const favCounter = document.querySelector("#heart-counter");
 // heart cards
 let temp = parseInt(favCounter.innerHTML);
 for(let i = 0; i < favList.length; i++) {
-    const currentElem = favList[i];
+    let  currentElem = favList[i];
+    
     currentElem.addEventListener("click", () => {
         if(currentElem.classList.contains("clicked")) {
             currentElem.classList.remove("clicked");
@@ -40,25 +41,29 @@ function addCall(serviceName, serviceNum, callTime) {
     callHistContainer.appendChild(tempDiv);
 }
 
+function getCardElem(e) {
+    return e.target.parentNode.parentNode;
+}
+
 // add history
 for(let i = 0; i < callBtns.length; i++) {
-    btn = callBtns[i];
+    let btn = callBtns[i];
     
     btn.addEventListener("click", (e) => {
         let temp = parseInt(coins.innerText);
-        
-        const cardElem = e.target.parentNode.parentNode;
+        const cardElem = getCardElem(e);
         const serviceName = cardElem.querySelectorAll("div")[0].querySelector("h2").innerText;
         const serviceNum = cardElem.querySelectorAll("div")[1].querySelector("p").innerText;
         
         
         if(temp < 20) {
-        alert("❌ You must have at least 20 coins to make a call!");
+            alert("❌ You must have at least 20 coins to make a call!");
         }
         else {
             alert(`📞 Calling ${serviceName} ${serviceNum}...`);
             temp -= 20;
             coins.innerText = temp;
+            
             let callTime = new Date().toLocaleTimeString();
             addCall(serviceName, serviceNum, callTime);
         }
@@ -69,3 +74,23 @@ for(let i = 0; i < callBtns.length; i++) {
 document.getElementById("clear-hist-btn").addEventListener("click", (e) => {
     callHistContainer.innerHTML = "";
 })
+
+// copy service number
+copyCounter = document.getElementById("copy-counter");
+copyBtns = document.querySelectorAll(".copy-btn");
+
+for(let i = 0; i < copyBtns.length; i++) {
+    let btn = copyBtns[i];
+    
+    btn.addEventListener("click", (e) => {
+        const cardElem = getCardElem(e);
+        const serviceNum = cardElem.querySelectorAll("div")[1].querySelector("p").innerText;
+        let temp = parseInt(copyCounter.innerText);
+        
+        navigator.clipboard.writeText(serviceNum);
+        alert(`Copied ${serviceNum}`);
+
+        temp += 1;
+        copyCounter.innerText = temp;
+    })
+}
