@@ -94,3 +94,8 @@ for(let i = 0; i < copyBtns.length; i++) {
         copyCounter.innerText = temp;
     })
 }
+
+// navigate to home page
+document.querySelector("header nav div").addEventListener("click", () => {
+    window.location.href = "/";
+});
