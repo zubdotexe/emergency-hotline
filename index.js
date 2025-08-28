@@ -98,7 +98,7 @@ for(let i = 0; i < copyBtns.length; i++) {
 
 // navigate to home page
 document.querySelector("header nav div").addEventListener("click", () => {
-    window.location.href = "/";
+    window.location.href = "./";
 });
 
 // effect on card hover
