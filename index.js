@@ -29,7 +29,7 @@ const callHistContainer = document.getElementById("call-hist-container");
 function addCall(serviceName, serviceNum, callTime) {
     const tempDiv = document.createElement("div");
     tempDiv.innerHTML = `
-        <div class="bg-[#FEF7FF] mb-2 p-4 rounded-md flex flex-wrap gap-2 justify-between items-center">
+        <div class="card bg-[#FEF7FF] mb-2 p-4 rounded-md flex flex-wrap gap-2 justify-between items-center">
             <div class="flex flex-col flex-wrap w-[60%]">
                 <h2 class="font-bold inter-font">${serviceName}</h2>
                 <p class="text-gray-500">${serviceNum}</p>
@@ -84,11 +84,12 @@ for(let i = 0; i < copyBtns.length; i++) {
     
     btn.addEventListener("click", (e) => {
         const cardElem = getCardElem(e);
+        const serviceName = cardElem.querySelectorAll("div")[0].querySelector("h2").innerText;
         const serviceNum = cardElem.querySelectorAll("div")[1].querySelector("p").innerText;
         let temp = parseInt(copyCounter.innerText);
         
         navigator.clipboard.writeText(serviceNum);
-        alert(`Copied ${serviceNum}`);
+        alert(`📑 Copied the number of ${serviceName}...`);
 
         temp += 1;
         copyCounter.innerText = temp;
@@ -99,3 +100,27 @@ for(let i = 0; i < copyBtns.length; i++) {
 document.querySelector("header nav div").addEventListener("click", () => {
     window.location.href = "/";
 });
+
+// effect on card hover
+document.querySelector("main div").addEventListener("mouseover", (e) => {
+    if(e.target.closest(".card")) {
+        e.target.closest(".card").style.backgroundColor = '#F5FFF6';
+    }
+});
+document.querySelector("main div").addEventListener("mouseout", (e) => {
+    if(e.target.closest(".card")) {
+        e.target.closest(".card").style.backgroundColor = 'white';
+    }
+});
+
+// effect on call history card hover
+document.querySelector("#call-hist-container").addEventListener("mouseover", (e) => {
+    if(e.target.closest(".card")) {
+        e.target.closest(".card").style.backgroundColor = '#FEE7FF';
+    }
+})
+document.querySelector("#call-hist-container").addEventListener("mouseout", (e) => {
+    if(e.target.closest(".card")) {
+        e.target.closest(".card").style.backgroundColor = '#FEF7FF';
+    }
+})
